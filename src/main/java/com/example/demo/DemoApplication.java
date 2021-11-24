@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringApplication;
 import com.fasterxml.jackson.core.exc.*;
 
 import java.io.*;
@@ -15,33 +16,34 @@ import com.example.demo.models.Employee;
 public class DemoApplication {
 
 	public static void main(String[] args) throws IOException  {
-		String path = "../demo/src/main/resources/EmployeeList.json";
-		List<Employee> listEmployee = readEmployee(path);
-		printEmployee(listEmployee);
-
-		//Add new employee to listEmployee
-		Employee emp1 = new Employee();
-		emp1.setName("Ryan");
-		emp1.setAge(28);
-		listEmployee.add(emp1);
-
-		writeEmployee(path, listEmployee);
+		SpringApplication.run(DemoApplication.class, args);
+//		String path = "../demo/src/main/resources/EmployeeList.json";
+//		List<Employee> listEmployee = readEmployee(path);
+//		printEmployee(listEmployee);
+//
+//		//Add new employee to listEmployee
+//		Employee emp1 = new Employee();
+//		emp1.setName("Ryan");
+//		emp1.setAge(28);
+//		listEmployee.add(emp1);
+//
+//		writeEmployee(path, listEmployee);
 
 	}
 
-	private static List<Employee> readEmployee(String pathName) throws IOException {
-		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-
-		File file = new File(pathName);
-		InputStream inputStream = new FileInputStream(file);
-		TypeReference<List<Employee>> typeReference = new TypeReference<List<Employee>>() {
-		};
-		List<Employee> listEmployee = objectMapper.readValue(inputStream, typeReference);
-		System.out.println("Read json file successfully");
-		inputStream.close();
-		return listEmployee;
-	}
+//	private static List<Employee> readEmployee(String pathName) throws IOException {
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+//
+//		File file = new File(pathName);
+//		InputStream inputStream = new FileInputStream(file);
+//		TypeReference<List<Employee>> typeReference = new TypeReference<List<Employee>>() {
+//		};
+//		List<Employee> listEmployee = objectMapper.readValue(inputStream, typeReference);
+//		System.out.println("Read json file successfully");
+//		inputStream.close();
+//		return listEmployee;
+//	}
 
 	private static void printEmployee(List<Employee> list) {
 		if (list.isEmpty()) {
